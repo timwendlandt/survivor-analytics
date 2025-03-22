@@ -1,5 +1,6 @@
 ﻿USE survivor_data
 
+/*Create table and load contestant_table csv*/
 DROP TABLE dbo.contestants;
 
 CREATE TABLE contestants(
@@ -7,7 +8,7 @@ CREATE TABLE contestants(
 	age INT,
 	hometown VARCHAR(75),
 	profession VARCHAR(75),
-	num_season VARCHAR(75),
+	num_season INT,
 	finish INT,
 	gender VARCHAR(5),
 	african_american INT,
@@ -45,3 +46,74 @@ WITH (
 	FIRSTROW = 2
 );
 
+SELECT * FROM dbo.contestants
+
+/*Create table and load season_table csv*/
+DROP TABLE dbo.season;
+
+CREATE TABLE season(
+	num_season INT,
+	season VARCHAR(75),
+	merged_tribe VARCHAR(75),
+	num_merge INT,
+	day_merge INT,
+	num_jury INT,
+	num_ftc INT,
+	num_swaps INT,
+	num_contestants INT,
+	redemption_island INT,
+	edge_of_extinction INT,
+	num_days INT,
+	african_american INT,
+	asian_american INT,
+	latin_american INT,
+	poc INT,
+	lgbt INT,
+	jewish INT,
+	muslim INT,
+	num_quits INT,
+	num_evacs INT,
+	winner VARCHAR(75)
+);
+
+BULK INSERT dbo.season
+FROM 'C:\Temp\season_table.csv'
+WITH (
+	FIELDTERMINATOR = ',',
+	ROWTERMINATOR = '\n',
+	FIRSTROW = 2
+);
+
+SELECT * FROM dbo.season
+
+/*Create table and load tribe_table csv*/
+DROP TABLE dbo.tribe;
+
+CREATE TABLE tribe(
+	num_season INT,
+	tribe VARCHAR(75),
+	iter_num INT,
+	num_contestants INT,
+	merge_ind INT,
+	african_american INT,
+	asian_american INT,
+	latin_american INT,
+	poc INT,
+	jewish INT,
+	muslim INT,
+	lgbt INT,
+	male INT,
+	female INT,
+	non_binary INT,
+	color VARCHAR(75)
+);
+
+BULK INSERT dbo.tribe
+FROM 'C:\Temp\tribe_table.csv'
+WITH (
+	FIELDTERMINATOR = ',',
+	ROWTERMINATOR = '\n',
+	FIRSTROW = 2
+);
+
+SELECT * FROM dbo.tribe
