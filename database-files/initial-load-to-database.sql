@@ -1,4 +1,5 @@
-﻿USE survivor_data
+﻿/*If this is the initial load, remove the DROP TABLE statements. Those were included to help troubleshoot the appropriate data type*/
+USE survivor_data
 
 /*Create table and load contestant_table csv*/
 DROP TABLE dbo.contestants;
