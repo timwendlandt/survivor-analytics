@@ -1,4 +1,7 @@
 # survivor_analytics
 Survivor analytics repository
 
-Likely the sample size is too small and the rules of the game change too frequently to provide any useful insights, but I like the show and think it will be a good project to learn how to integrate git with visual studio and jupyter notebooks.
+Building a database from the following dataset to explore.
+
+
+https://www.kaggle.com/datasets/justinveiner/survivor-cbs-dataset?resource=download
