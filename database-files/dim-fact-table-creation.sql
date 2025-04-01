@@ -1,23 +1,15 @@
 ﻿USE survivor_data
 
+DROP TABLE dbo.dim_contestants
+
 /*dim_contestant creation*/
-SELECT contestant_name,
-	age,
+SELECT DISTINCT contestant_name,
 	hometown,
 	profession,
-	num_season,
-	finish,
 	state_from,
 	country,
-	num_appearance,
 	birthdate,
-	merge_made,
-	jury,
-	ftc,
-	num_boot,
-	tribe1,
-	tribe2,
-	tribe3
+	gender
 INTO dim_contestants
 FROM dbo.contestants
 
@@ -27,3 +19,4 @@ ALTER TABLE dbo.dim_contestants ADD CONSTRAINT pk_contestant_id PRIMARY KEY (con
 
 SELECT *
 FROM dbo.dim_contestants
+ORDER BY contestant_name
