@@ -1,7 +1,5 @@
 ﻿USE survivor_data;
 
-DROP TABLE dim_contestants;
-
 /*dim_contestant creation*/
 WITH hometown_changes AS (
 	SELECT contestant_name,
