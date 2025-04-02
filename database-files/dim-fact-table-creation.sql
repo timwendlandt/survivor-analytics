@@ -1,5 +1,7 @@
 ﻿USE survivor_data;
 
+DROP TABLE dim_contestants;
+
 /*dim_contestant creation*/
 WITH hometown_changes AS (
 	SELECT contestant_name,
@@ -29,15 +31,15 @@ SELECT contestant_name,
 		THEN 1
 		ELSE 0
 	END AS is_current_ind
-INTO dim_contestants
+INTO dim_contestant
 FROM hometown_changes
 WHERE (hometown <> prior_hometown OR prior_hometown IS NULL) OR (profession <> prior_profession OR prior_profession IS NULL)
 ORDER BY contestant_name
 
 /*Add a surrogate primary key (contestant_name, num_season)*/
-ALTER TABLE dbo.dim_contestants ADD contestant_id INT IDENTITY(1,1)
-ALTER TABLE dbo.dim_contestants ADD CONSTRAINT pk_contestant_id PRIMARY KEY (contestant_id)
+ALTER TABLE dbo.dim_contestant ADD contestant_id INT IDENTITY(1,1)
+ALTER TABLE dbo.dim_contestant ADD CONSTRAINT pk_contestant_id PRIMARY KEY (contestant_id)
 
 SELECT *
-FROM dbo.dim_contestants
+FROM dbo.dim_contestant
 ORDER BY contestant_name
