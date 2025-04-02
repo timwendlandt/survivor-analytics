@@ -1,7 +1,7 @@
 ﻿USE survivor_data;
 
 /*dim_contestant creation*/
-WITH hometown_changes AS (
+WITH type_two_dims AS (
 	SELECT contestant_name,
 		hometown,
 		profession,
@@ -30,7 +30,7 @@ SELECT contestant_name,
 		ELSE 0
 	END AS is_current_ind
 INTO dim_contestant
-FROM hometown_changes
+FROM type_two_dims
 WHERE (hometown <> prior_hometown OR prior_hometown IS NULL) OR (profession <> prior_profession OR prior_profession IS NULL)
 ORDER BY contestant_name
 

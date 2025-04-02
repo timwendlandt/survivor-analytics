@@ -1,6 +1,6 @@
 ﻿USE survivor_data;
 
-WITH hometown_changes AS (
+WITH type_two_dims AS (
 	SELECT contestant_name,
 		hometown,
 		profession,
@@ -28,6 +28,6 @@ SELECT contestant_name,
 		THEN 1
 		ELSE 0
 	END AS is_current_ind
-FROM hometown_changes
+FROM type_two_dims
 WHERE ((hometown <> prior_hometown OR prior_hometown IS NULL) OR (profession <> prior_profession OR prior_profession IS NULL)) AND contestant_name = 'Tyson Apostol'
 ORDER BY contestant_name
