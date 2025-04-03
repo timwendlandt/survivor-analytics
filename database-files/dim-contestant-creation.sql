@@ -3,6 +3,7 @@
 /*dim_contestant creation*/
 WITH type_two_dims AS (
 	SELECT contestant_name,
+		contestant_id,
 		hometown,
 		profession,
 		state_from,
@@ -17,6 +18,7 @@ WITH type_two_dims AS (
 	FROM dbo.contestants)
 
 SELECT contestant_name,
+	contestant_id,
 	state_from,
 	country,
 	birthdate,
@@ -35,8 +37,8 @@ WHERE (hometown <> prior_hometown OR prior_hometown IS NULL) OR (profession <> p
 ORDER BY contestant_name
 
 /*Add a surrogate primary key (contestant_name, num_season)*/
-ALTER TABLE dbo.dim_contestant ADD contestant_id INT IDENTITY(1,1)
-ALTER TABLE dbo.dim_contestant ADD CONSTRAINT pk_contestant_id PRIMARY KEY (contestant_id)
+ALTER TABLE dbo.dim_contestant ADD dim_contestant_id INT IDENTITY(1,1)
+ALTER TABLE dbo.dim_contestant ADD CONSTRAINT pk_contestant_id PRIMARY KEY (dim_contestant_id)
 
 SELECT *
 FROM dbo.dim_contestant

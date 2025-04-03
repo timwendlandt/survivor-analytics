@@ -44,6 +44,20 @@ WITH (
 	FIRSTROW = 2
 );
 
+/*Add contestant_id*/
+ALTER TABLE dbo.contestants ADD contestant_id INT;
+
+WITH contestant_dense_rank AS (
+	SELECT DENSE_RANK() OVER (ORDER BY contestant_name) AS contestant_id,
+		contestant_name
+	FROM dbo.contestants)
+
+UPDATE c
+set c.contestant_id = cdr.contestant_id
+FROM dbo.contestants c
+JOIN contestant_dense_rank cdr
+ON cdr.contestant_name = c.contestant_name
+
 SELECT * FROM dbo.contestants
 
 /*Create table and load season_table csv*/
