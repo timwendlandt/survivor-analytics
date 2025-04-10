@@ -1,6 +1,9 @@
 ﻿USE survivor_data;
 
 /*fact_contestant_season creation*/
+IF OBJECT_ID('dbo.fact_contestant_season', 'U') IS NOT NULL
+	DROP TABLE dbo.fact_contestant_season
+
 SELECT num_season AS season_id,
 	contestant_id,
 	finish,
