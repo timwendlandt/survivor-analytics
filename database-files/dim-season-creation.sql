@@ -1,6 +1,9 @@
 ﻿USE survivor_data;
 
 /*dim_season creation*/
+IF OBJECT_ID('dbo.dim_season', 'U') IS NOT NULL
+	DROP TABLE dbo.dim_season
+	
 SELECT DISTINCT winner,
 	merged_tribe,
 	season,

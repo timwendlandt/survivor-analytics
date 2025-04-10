@@ -1,6 +1,9 @@
 ﻿USE survivor_data;
 
 /*dim_contestant creation*/
+IF OBJECT_ID('dbo.dim_contestant', 'U') IS NOT NULL
+	DROP TABLE dbo.dim_contestant;
+	
 WITH type_two_dims AS (
 	SELECT contestant_name,
 		contestant_id,

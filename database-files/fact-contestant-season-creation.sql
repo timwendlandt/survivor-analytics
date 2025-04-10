@@ -1,7 +1,5 @@
 ﻿USE survivor_data;
 
-DROP TABLE dbo.fact_contestant_season
-
 /*fact_contestant_season creation*/
 SELECT num_season AS season_id,
 	contestant_id,

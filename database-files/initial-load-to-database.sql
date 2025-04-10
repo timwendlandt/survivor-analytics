@@ -1,6 +1,9 @@
 ﻿USE survivor_data
 
 /*Create table and load contestant_table csv*/
+IF OBJECT_ID('dbo.contestants', 'U') IS NOT NULL
+	DROP TABLE dbo.contestants
+
 CREATE TABLE contestants(
 	contestant_name VARCHAR(75),
 	age INT,
@@ -50,7 +53,8 @@ ALTER TABLE dbo.contestants ADD contestant_id INT;
 WITH contestant_dense_rank AS (
 	SELECT DENSE_RANK() OVER (ORDER BY contestant_name) AS contestant_id,
 		contestant_name
-	FROM dbo.contestants)
+	FROM dbo.contestants
+)
 
 UPDATE c
 set c.contestant_id = cdr.contestant_id
@@ -61,6 +65,9 @@ ON cdr.contestant_name = c.contestant_name
 SELECT * FROM dbo.contestants
 
 /*Create table and load season_table csv*/
+IF OBJECT_ID('dbo.season', 'U') IS NOT NULL
+	DROP TABLE dbo.season
+
 CREATE TABLE season(
 	num_season INT,
 	season VARCHAR(75),
@@ -97,6 +104,9 @@ WITH (
 SELECT * FROM dbo.season
 
 /*Create table and load tribe_table csv*/
+IF OBJECT_ID('dbo.tribe', 'U') IS NOT NULL
+	DROP TABLE dbo.tribe
+	
 CREATE TABLE tribe(
 	num_season INT,
 	tribe VARCHAR(75),
