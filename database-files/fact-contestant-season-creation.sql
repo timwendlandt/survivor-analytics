@@ -35,7 +35,8 @@ SET f.dim_contestant_id = d.dim_contestant_id
 FROM dbo.fact_contestant_season f
 JOIN dbo.dim_contestant d
 	ON f.contestant_id = d.contestant_id
-	AND f.season_id BETWEEN d.effective_season AND d.end_season
+	AND f.season_id >= d.effective_season
+	AND (f.season_id <= d.end_season OR d.end_season IS NULL)
 
 
 SELECT *
