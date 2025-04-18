@@ -1,5 +1,6 @@
-﻿USE survivor_data;
+﻿USE survivor_data
 
+/*How many players have played? played once? played more than once?*/
 SELECT COUNT(sub1.contestants) AS number_of_contestants,
 	SUM(CASE
 			WHEN sub1.number_of_seasons_played = 1
@@ -25,3 +26,8 @@ FROM (
 	SELECT contestant_id AS contestants, COUNT(contestant_id) AS number_of_seasons_played
 	FROM dim_contestant
 	GROUP BY contestant_id) sub1
+
+/*What % of multiseason players have won? What % of single season players have won*/
+
+
+
