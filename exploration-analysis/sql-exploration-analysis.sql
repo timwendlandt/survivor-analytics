@@ -29,14 +29,14 @@ SELECT COUNT(contestants) AS number_of_contestants,
 		END)*1.0/COUNT(contestants)) * 100.0 AS percentage_of_multiseason_contestants
 FROM contestantcounts;
 
-/*What % of multiseason players have won? What % of single season players have won*/
+/*What % of winners have one once? What % of winners have one more than once?*/
 WITH winnercounts AS (
-	SELECT f.contestant_id AS contestants, COUNT(f.contestant_id) AS number_of_seasons_won
-	FROM fact_contestant_season f
+	SELECT contestant_id AS contestants, COUNT(contestant_id) AS number_of_seasons_won
+	FROM fact_contestant_season
 
-	WHERE f.finish = 1
+	WHERE finish = 1
 
-	GROUP BY f.contestant_id)
+	GROUP BY contestant_id)
 
 SELECT COUNT(contestants) AS number_of_winners,
 	SUM(CASE
@@ -60,6 +60,26 @@ SELECT COUNT(contestants) AS number_of_winners,
 			ELSE 0
 		END)*1.0/COUNT(contestants)) * 100.0 AS percentage_of_multiseason_winners
 FROM winnercounts;
+
+/*Average votes against winners*/
+SELECT AVG(votes_against) AS avg_votes_against
+FROM fact_contestant_season
+WHERE finish = 1
+
+/*Average votes against runner ups*/
+SELECT AVG(votes_against) AS avg_votes_against
+FROM fact_contestant_season
+WHERE finish = 2
+
+/*Average votes against 2 - 15*/
+SELECT AVG(votes_against) AS avg_votes_against
+FROM fact_contestant_season
+WHERE finish <> 1 AND finish >= 15
+
+/*Average votes against <15*/
+SELECT AVG(votes_against) AS avg_votes_against
+FROM fact_contestant_season
+WHERE finish < 15
 
 
 
