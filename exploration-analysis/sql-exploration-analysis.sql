@@ -81,5 +81,45 @@ SELECT AVG(votes_against) AS avg_votes_against
 FROM fact_contestant_season
 WHERE finish < 15
 
+/*Number of winners with no votes against*/
+SELECT COUNT(contestant_id) AS no_vote_winners
+FROM fact_contestant_season
+WHERE votes_against = 0
+AND finish = 1
+
+/*Number of winners by state*/
+SELECT c.state_from, COUNT(c.state_from) AS number_of_winners
+FROM fact_contestant_season f
+
+INNER JOIN dim_contestant c
+ON c.dim_contestant_id = f.dim_contestant_id
+
+WHERE f.finish = 1
+GROUP BY c.state_from
+ORDER BY COUNT(c.state_from) DESC
+
+/*Number of winners by profession*/
+SELECT c.profession, COUNT(c.profession) AS number_of_winners
+FROM fact_contestant_season f
+
+INNER JOIN dim_contestant c
+ON c.dim_contestant_id = f.dim_contestant_id
+
+WHERE f.finish = 1
+GROUP BY c.profession
+ORDER BY COUNT(c.profession) DESC
+
+/*Number players by state*/
+SELECT c.state_from, COUNT(c.state_from) AS number_of_players
+FROM dim_contestant c
+GROUP BY c.state_from
+ORDER BY COUNT(c.state_from) DESC
+
+/*Number players by profession*/
+SELECT c.profession, COUNT(c.profession) AS number_of_players
+FROM dim_contestant c
+GROUP BY c.profession
+ORDER BY COUNT(c.profession) DESC
+
 
 
